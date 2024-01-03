@@ -33,26 +33,7 @@ By using three variable K-Map, we can get the simplified expression for next sta
 The maximum possible groupings of adjacent ones are already shown in the figure. Therefore, the simplified expression for next state Qt+1t+1 is
 Q(t+1)=S+R′Q(t)Q(t+1)=S+R′Q(t)
 
-PROGRAM:
-```
-module exp_5_1(S,R,clk,Q,Qbar);
-input S,R,clk;
-output reg Q;
-output reg Qbar;
-initial Q=0;
-initial Qbar=1;
-always @(posedge clk)
-begin
-Q=S|((~R)&Q);
-Qbar=R|((~S)&(Qbar));
-end
-endmodule
-```
-RTL LOGIC FOR FLIPFLOP :
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/5572f69a-254b-4de0-9cbb-2bd29179a0c7)
-
-TIMING DIAGRAM FOR FLIPFLOP:
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/f04f5172-8eb7-4084-a4bf-1ade4fec2313)
+313)
 
 
 
@@ -76,26 +57,6 @@ Qt+1t+1 = D
 
 Next state of D flip-flop is always equal to data input, D for every positive transition of the clock signal. Hence, D flip-flops can be used in registers, shift registers and some of the counters.
 
-PROGRAM:
-```
-module exp_5D(D,clk,Q,Qbar);
-input D,clk;
-output reg Q;
-output reg Qbar;
-initial Q=0;
-initial Qbar=1;
-always @(posedge clk)
-begin 
-Q=D;
-Qbar=~D;
-end
-endmodule
-```
-RTL LOGIC FOR FLIPFLOP:
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/54885a3d-06f2-4119-bb64-e796d5939e1a)
-
-TIMING DIAGRAM FOR FLIPFLOP:
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/266c6c4c-eb3d-4b1f-b802-7b3d6190be02)
 
 
 ### JK Flip-Flop
@@ -122,33 +83,14 @@ By using three variable K-Map, we can get the simplified expression for next sta
 
 The maximum possible groupings of adjacent ones are already shown in the figure. Therefore, the simplified expression for next state Qt+1t+1 is
 Q(t+1)=JQ(t)′+K′Q(t)Q(t+1)=JQ(t)′+K′Q(t)
-PROGRAM:
-```
-module exp_5_2(J,K,clk,Q,Qbar);
-input J,K,clk;
-output reg Q;
-output reg Qbar;
-initial Q=0;
-initial Qbar=1;
-always @(posedge clk)
-begin
-Q=(J&(~Q))|((~K)&Q);
-Qbar=((~J)&(Qbar))|K&(~Qbar);
-end
-endmodule
-```
-RTL LOGIC FOR FLIPFLOP:
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/f39a698c-7763-4d80-9415-8a004bbdf7d9)
 
-TIMING DIAGRAM FOR FLIPFLOP:
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/6f8595ae-d7e2-4d0c-8f57-d445a3db92a5)
+
 
 
 ### T Flip-Flop
 T flip-flop is the simplified version of JK flip-flop. It is obtained by connecting the same input ‘T’ to both inputs of JK flip-flop. It operates with only positive clock transitions or negative clock transitions. The circuit diagram of T flip-flop is shown in the following figure.
 
 ![image](https://user-images.githubusercontent.com/36288975/167911534-5f3c445d-bc68-46e2-9a9c-7efce5febc60.png)
-
 
 
 This circuit has single input T and two outputs Qtt & Qtt’. The operation of T flip-flop is same as that of JK flip-flop. Here, we considered the inputs of JK flip-flop as J = T and K = T in order to utilize the modified JK flip-flop for 2 combinations of inputs. So, we eliminated the other two combinations of J & K, for which those two values are complement to each other in T flip-flop.
@@ -166,7 +108,56 @@ From the above characteristic table, we can directly write the next state equati
 Q(t+1)=T′Q(t)+TQ(t)′
 ⇒Q(t+1)=T⊕Q(t)
 
+REGISTER NUMBER:23013627
+DEVELOPED BY:SARIDHA M A
+
 PROGRAM:
+SR FLIPFLOP:
+```
+module exp_5_1(S,R,clk,Q,Qbar);
+input S,R,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin
+Q=S|((~R)&Q);
+Qbar=R|((~S)&(Qbar));
+end
+endmodule
+```
+D - FLIPFLOP:
+```
+module exp_5D(D,clk,Q,Qbar);
+input D,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin 
+Q=D;
+Qbar=~D;
+end
+endmodule
+```
+JK-FLIPFLOP:
+```
+module exp_5_2(J,K,clk,Q,Qbar);
+input J,K,clk;
+output reg Q;
+output reg Qbar;
+initial Q=0;
+initial Qbar=1;
+always @(posedge clk)
+begin
+Q=(J&(~Q))|((~K)&Q);
+Qbar=((~J)&(Qbar))|K&(~Qbar);
+end
+endmodule
+```
+T-FLIPFLOP:
 ```
 module exp_5_4(T,clk,Q,Qbar);
 input T,clk;
@@ -181,11 +172,25 @@ Qbar=((~T)&Qbar)|(T&(~Qbar));
 end 
 endmodule
 ```
-RTL LOGIC FOR FLIPFLOP:
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/cbc3aa56-6099-475f-a938-9bcce7d4820f)
+RTL Logic for flipflops:
+SR FLIPFLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/5c32555d-9316-4abe-81b0-17c458f1a2e7)
+D FLIPFLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/4c1b0820-0b34-4980-a374-5386b198cfd6)
+JK FLIPFLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/0232c0ff-9758-4680-b0e8-4587507aa8bc)
+T FLIPFLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/26c4d96d-7b46-4867-92f8-a25b9f29c26a)
 
-TIMING DIAGRAM FOR FLIPFLOP:
-![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/e7e0d8d5-ba0f-446b-8b53-6d94d1b8cfd4)
+TIMING DIGRAMS FOR FLIP FLOPS
+SR-FLIPFLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/5858aeb4-3654-492b-a2b9-e479e79a6575)
+D-FLIPFLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/b6886978-6f36-4638-be0d-f1d9035526a3)
+JK-FLIPFLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/3f9b5769-a17c-4788-acd5-5cd97bf61f0f)
+T FLIP-FLOP:
+![image](https://github.com/sandhiya2815/Experiment--05-Implementation-of-flipflops-using-verilog/assets/155123230/c2be7119-7abe-49c6-abad-b0a0006e4d00)
 
-### RESULTS 
+RESULT:
 Implementation-of-flipflops-using-verilog successfully completed.
